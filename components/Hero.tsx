@@ -14,9 +14,7 @@ import NowPlaying from "./spotify/NowPlaying";
 import { getTopTracks } from "@/lib/spotify";
 import { TracksList } from "./spotify/TopTracksList";
 
-export default async function Hero() {
-  const tracks = await getTopTracks();
-
+const ProfileImageWithSocials = ({ isMobile = false }) => {
   const socials = [
     {
       name: "twitter",
@@ -47,8 +45,57 @@ export default async function Hero() {
       link: user.instagram,
     },
   ];
+
+  return (
+    <div
+      className={`flex ${"flex-col items-center lg:flex-row lg:items-center lg:justify-between"}`}
+    >
+      <Image
+        src={`/images/profile.jpeg`}
+        width={260}
+        height={260}
+        alt="Avatar"
+        className="rounded-2xl"
+      />
+      <div
+        className={`flex ${
+          isMobile
+            ? "flex-row ml-4"
+            : "lg:flex-col justify-center lg:justify-center space-x-4 lg:space-x-0 lg:space-y-4 mt-4 lg:mt-0"
+        }`}
+      >
+        {socials.map((socialLink, idx) => (
+          <a
+            key={`footer-link-${idx}`}
+            href={socialLink.link}
+            className="text-sm relative"
+            target="__blank"
+          >
+            <span className="relative z-10 p-2 inline-block hover:text-cyan-500">
+              {socialLink.icon}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default async function Hero() {
+  const tracks = await getTopTracks();
+
   return (
     <div className="mt-10 px-8 flex flex-col lg:flex-row lg:space-x-10">
+      {/* Profile image with socials for mobile */}
+      <div className="lg:hidden mb-8">
+        <ProfileImageWithSocials isMobile={true} />
+      </div>
+
+      {/* Now Playing for mobile */}
+      <div className="lg:hidden mb-8 flex justify-center">
+        <NowPlaying />
+      </div>
+
       <div className="flex-grow">
         <div className="flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 justify-between">
           <div>
@@ -106,30 +153,14 @@ export default async function Hero() {
       </div>
 
       <aside className="lg:w-[300px] mt-10 lg:mt-0">
-        <div className="flex flex-col items-center lg:flex-row lg:items-center lg:justify-between">
-          <Image
-            src={`/images/profile.jpeg`}
-            width={260}
-            height={260}
-            alt="Avatar"
-            className="rounded-2xl"
-          />
-          <div className="flex lg:flex-col justify-center lg:justify-center space-x-4 lg:space-x-0 lg:space-y-4 mt-4 lg:mt-0">
-            {socials.map((socialLink, idx) => (
-              <a
-                key={`footer-link-${idx}`}
-                href={socialLink.link}
-                className="text-sm relative"
-                target="__blank"
-              >
-                <span className="relative z-10 p-2 inline-block hover:text-cyan-500">
-                  {socialLink.icon}
-                </span>
-              </a>
-            ))}
-          </div>
+        {/* Profile image with socials for desktop */}
+        <div className="hidden lg:block">
+          <ProfileImageWithSocials />
         </div>
-        <NowPlaying />
+        {/* Now Playing for desktop */}
+        <div className="hidden lg:block">
+          <NowPlaying />
+        </div>
         <TracksList tracks={tracks} />
       </aside>
     </div>
