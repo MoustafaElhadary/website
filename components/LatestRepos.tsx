@@ -1,3 +1,5 @@
+"use client";
+
 import { truncateText } from "@/lib/utils";
 import { Repository } from "@/types/repos";
 import { AnimatePresence, motion } from "framer-motion";
@@ -23,12 +25,12 @@ export const LatestRepos = ({
             onMouseEnter={() => setHoveredIndex(idx)}
             key={repo?.html_url}
             onMouseLeave={() => setHoveredIndex(null)}
-            className="group relative rounded-2xl border border-zinc-800 shadow-sm p-4 bg-gradient-to-b from-zinc-800 to-zinc-900 flex flex-col justify-between h-full"
+            className="group relative rounded-2xl border border-gray-200 shadow-sm p-4 bg-white flex flex-col justify-between h-full transition duration-300 hover:shadow-md"
           >
             <AnimatePresence>
               {hoveredIndex === idx && (
                 <motion.span
-                  className="absolute inset-0 h-full w-full bg-zinc-800  rounded-xl"
+                  className="absolute inset-0 h-full w-full bg-gray-50 rounded-xl"
                   layoutId="hoverBackground"
                   initial={{ opacity: 0 }}
                   animate={{
@@ -44,21 +46,23 @@ export const LatestRepos = ({
             </AnimatePresence>
             <div className="relative z-50 flex flex-col justify-between h-full">
               <div>
-                <h2 className="text-base  font-bold">{repo.name}</h2>
-                <p className="  font-normal text-sm leading-loose mt-4 tracking-wide">
+                <h2 className="text-base font-bold text-gray-800">
+                  {repo.name}
+                </h2>
+                <p className="font-normal text-sm leading-loose mt-4 tracking-wide text-gray-600">
                   {truncateText(repo?.description, 100)}
                 </p>
               </div>
 
-              <div className="mt-4 flex flex-row space-x-4 items-center 0 group-hover:text-cyan-500">
-                <div className=" font-normal text-sm flex flex-row space-x-1 items-center ">
-                  <AiOutlineFork className="h-4 w-4 stroke-1 " />
-                  <span className=" group-hover:text-cyan-500">
+              <div className="mt-4 flex flex-row space-x-4 items-center text-gray-600 group-hover:text-cyan-600">
+                <div className="font-normal text-sm flex flex-row space-x-1 items-center">
+                  <AiOutlineFork className="h-4 w-4 stroke-1" />
+                  <span className="group-hover:text-cyan-600">
                     {repo.forks_count}
                   </span>
                 </div>
-                <div className=" font-normal text-sm flex flex-row space-x-1 items-center">
-                  <AiOutlineStar className="h-4 w-4 stroke-1 " />
+                <div className="font-normal text-sm flex flex-row space-x-1 items-center">
+                  <AiOutlineStar className="h-4 w-4 stroke-1" />
                   <span className="">{repo.stargazers_count}</span>
                 </div>
               </div>
@@ -68,12 +72,12 @@ export const LatestRepos = ({
       </div>
       {showMore && (
         <div>
-          <div className="absolute h-56 max-w-5xl mx-auto w-full bottom-0 bg-zinc-900 z-[60] [mask-image:linear-gradient(to_bottom,transparent,white_10rem,white)] transition duration-500 flex items-center justify-center" />
+          <div className="absolute h-56 max-w-5xl mx-auto w-full bottom-0 bg-gradient-to-t from-white via-white to-transparent z-[60] transition duration-500 flex items-center justify-center" />
 
-          <div className="flex justify-center relative z-[70] ">
+          <div className="flex justify-center relative z-[70]">
             <Link
               href="/contributions"
-              className=" border border-zinc-600 bg-zinc-900 px-8 py-2 rounded-lg hover:border-zinc-700 hover:bg-zinc-800/[0.8] transition duration-200"
+              className="border border-gray-300 bg-white px-8 py-2 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition duration-200 text-gray-800"
             >
               Show More
             </Link>

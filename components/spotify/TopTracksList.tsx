@@ -35,7 +35,7 @@ export const TracksList = ({ tracks }: { tracks: SpotifyTrack[] }) => {
       <Card className="w-full py-4">
         <CardContent>
           <ul className="space-y-4">
-            {tracks.map((track, index) => (
+            {tracks.map((track) => (
               <li
                 key={track.songUrl}
                 className={`flex items-center space-x-4 group cursor-pointer rounded-md transition-colors duration-300 p-2 ${
