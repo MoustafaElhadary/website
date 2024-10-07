@@ -13,10 +13,6 @@ export const navItems: NavItem[] = [
     link: "/projects",
   },
   {
-    name: "Contributions",
-    link: "/contributions",
-  },
-  {
     name: "Events",
     link: "/events",
   },

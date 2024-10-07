@@ -15,10 +15,8 @@ export const Experience = () => {
     workExperience[0]
   );
 
-  // Add this key state
   const [animationKey, setAnimationKey] = useState(0);
 
-  // Modify the setActiveWorkExperience function
   const handleSetActiveWorkExperience = (exp: typeof activeWorkExperience) => {
     setActiveWorkExperience(exp);
     setAnimationKey((prev) => prev + 1);

@@ -149,24 +149,17 @@ const player: React.CSSProperties = {
 };
 
 const initialInputProps: AudiogramCompositionSchemaType = {
-  // Audio settings
   audioOffsetInSeconds: 0,
-
-  // Title settings
   audioFileName: staticFile("moustafa.mp3"),
   coverImgFileName: staticFile("cover.jpg"),
   titleText: "AI-Generated Podcast: Exploring the Life and Work of Moustafa",
   titleColor: "rgba(186, 186, 186, 0.93)",
-
-  // Subtitles settings
   subtitlesFileName: staticFile("subtitles.srt"),
   onlyDisplayCurrentSentence: true,
   subtitlesTextColor: "rgba(255, 255, 255, 0.93)",
   subtitlesLinePerPage: 4,
   subtitlesZoomMeasurerSize: 10,
   subtitlesLineHeight: 98,
-
-  // Wave settings
   waveColor: "#a3a5ae",
   waveFreqRangeStartIndex: 7,
   waveLinesToDisplay: 29,
@@ -179,13 +172,11 @@ const initialInputProps: AudiogramCompositionSchemaType = {
 const Home: NextPage = () => {
   const [inputProps, setInputProps] =
     useState<AudiogramCompositionSchemaType>(initialInputProps);
-
   const handleInputPropsChange = (
     newProps: Partial<AudiogramCompositionSchemaType>
   ) => {
     setInputProps((prevProps) => ({ ...prevProps, ...newProps }));
   };
-
   return (
     <div className="py-10 px-4 md:px-10 max-w-7xl mx-auto">
       <div className="flex items-center justify-center mb-6">

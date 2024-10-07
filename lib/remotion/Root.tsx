@@ -70,6 +70,7 @@ export const RemotionRoot: React.FC = () => {
           waveNumberOfSamples: "256", // This is string for Remotion controls and will be converted to a number
           mirrorWave: true,
           durationInSeconds: 849,
+          backgroundColor: "rgba(0, 0, 0, 0.93)",
         }}
         // Determine the length of the video based on the duration of the audio file
         calculateMetadata={({ props }) => {
