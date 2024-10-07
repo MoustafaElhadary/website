@@ -1,3 +1,5 @@
+"use client";
+
 import { projects } from "@/constants/projects";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -48,10 +50,10 @@ export const Projects = () => {
                   />
                 </div>
                 <div className="p-4">
-                  <h4 className="text-zinc-100 font-bold tracking-wide mt-4">
+                  <h4 className=" font-bold tracking-wide mt-4">
                     {project.title}
                   </h4>
-                  <p className="mt-8 text-zinc-400 tracking-wide leading-relaxed text-sm">
+                  <p className="mt-8  tracking-wide leading-relaxed text-sm">
                     {project.description}
                   </p>
 
@@ -67,10 +69,10 @@ export const Projects = () => {
                     ))}
                   </div>
                   <div className="flex flex-row space-x-2 mt-4 items-center px-0.5">
-                    <BsTerminal className="h-3 w-3 stroke-1.5 text-zinc-500 group-hover:text-cyan-500" />
+                    <BsTerminal className="h-3 w-3 stroke-1.5 0 group-hover:text-cyan-500" />
                     <p
                       // href={project.link}
-                      className="text-zinc-500 group-hover:text-cyan-500 text-xs"
+                      className="0 group-hover:text-cyan-500 text-xs"
                     >
                       View Source
                     </p>

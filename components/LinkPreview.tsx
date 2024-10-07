@@ -1,3 +1,5 @@
+"use client";
+
 import { Portal, Transition } from "@headlessui/react";
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
 import Image from "next/image";

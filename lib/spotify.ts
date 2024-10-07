@@ -1,5 +1,4 @@
-import { PlaybackState, Track } from "@spotify/web-api-ts-sdk";
-import querystring from "querystring";
+import { Track } from "@spotify/web-api-ts-sdk";
 
 const {
   SPOTIFY_CLIENT_ID: client_id,
@@ -7,66 +6,93 @@ const {
   SPOTIFY_REFRESH_TOKEN: refresh_token,
 } = process.env;
 
-const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
 const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`;
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
+export type SpotifyTrack = {
+  artist: string;
+  songUrl: string;
+  imageURL?: string;
+  previewURL: string | null;
+  title: string;
+};
+
+export type NowPlayingData = {
+  album?: string;
+  albumImageUrl?: string;
+  artist?: string;
+  isPlaying: boolean;
+  songUrl?: string;
+  title?: string;
+  previewURL?: string | null;
+};
+
 const getAccessToken = async () => {
-  const response = await fetch(TOKEN_ENDPOINT, {
+  const options = {
     method: "POST",
     headers: {
-      Authorization: `Basic ${basic}`,
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: querystring.stringify({
+    body: new URLSearchParams({
       grant_type: "refresh_token",
-      refresh_token,
+      client_id: client_id!,
+      client_secret: client_secret!,
+      refresh_token: refresh_token!,
     }),
-  });
+  };
+
+  const response = await fetch(TOKEN_ENDPOINT, options);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
   return response.json();
 };
 
-export const getNowPlaying = async () => {
-  const { access_token } = await getAccessToken();
+export const getNowPlaying = async (): Promise<NowPlayingData> => {
+  try {
+    const { access_token } = await getAccessToken();
 
-  const response = await fetch(NOW_PLAYING_ENDPOINT, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+    const response = await fetch(NOW_PLAYING_ENDPOINT, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
 
-  if (response.status === 204 || response.status > 400) {
+    const data = await response.json();
+    console.log({ data });
+
+    if (!data.is_playing || !data.item) {
+      return { isPlaying: false };
+    }
+
+    const isPlaying = data.is_playing;
+    const item = data.item as Track;
+    const title = item.name;
+    const artist = item.artists.map((_artist) => _artist.name).join(", ");
+    const album = item.album.name;
+    const albumImageUrl = item.album.images[0].url;
+    const songUrl = item.external_urls.spotify;
+    const previewURL = item.preview_url;
+
+    return {
+      album,
+      albumImageUrl,
+      artist,
+      isPlaying,
+      songUrl,
+      title,
+      previewURL,
+    };
+  } catch (error) {
+    console.error("Error fetching now playing:", error);
     return { isPlaying: false };
   }
-
-  const data = await response.json();
-  const song = data as PlaybackState;
-
-  if (!song.item) {
-    return { isPlaying: false };
-  }
-
-  const isPlaying = song.is_playing;
-  const item = song.item as Track;
-  const title = item.name;
-  const artist = item.artists.map((_artist) => _artist.name).join(", ");
-  const album = item.album.name;
-  const albumImageUrl = item.album.images[0].url;
-  const songUrl = item.external_urls.spotify;
-
-  return {
-    album,
-    albumImageUrl,
-    artist,
-    isPlaying,
-    songUrl,
-    title,
-  };
 };
 
-export const getTopTracks = async () => {
+export const getTopTracks = async (): Promise<SpotifyTrack[]> => {
   const { access_token } = await getAccessToken();
 
   const response = await fetch(TOP_TRACKS_ENDPOINT, {

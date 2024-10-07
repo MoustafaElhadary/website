@@ -15,7 +15,7 @@ export const DesktopNav = ({ navItems }: { navItems: NavItem[] }) => {
         <CustomLink
           key={`link=${idx}`}
           href={navItem.link}
-          className="text-white text-sm relative"
+          className=" text-sm relative"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >

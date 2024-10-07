@@ -105,22 +105,22 @@ export const Contact = () => {
             className="mb-4 rounded-xl shadow-2xl bg-zinc-800   flex flex-col overflow-hidden mx-4 md:mx-0"
           >
             <div className="p-4 bg-zinc-700 ">
-              <h2 className="text-zinc-200 font-bold text-sm md:text-xl ">
+              <h2 className=" font-bold text-sm md:text-xl ">
                 Have a question? Drop in your message 👇
               </h2>
-              <small className="hidden md:block text-xs text-zinc-400 mb-10 ">
+              <small className="hidden md:block text-xs  mb-10 ">
                 It won&apos;t take more than 10 seconds. Shoot your shot. 😉
               </small>
             </div>
             <div className="content p-6 flex flex-col bg-zinc-800">
-              <label className="text-sm font-normal text-zinc-400 mb-2 ">
+              <label className="text-sm font-normal  mb-2 ">
                 Email Address
               </label>
               <input
                 type="email"
                 value={formState.email.value}
                 onChange={(e) => onChangeHandler("email", e.target.value)}
-                className="text-zinc-400 rounded-md border bg-zinc-800 border-zinc-700 py-1 px-2 focus:outline-none focus:border-gray-400 placeholder:text-sm  mb-1"
+                className=" rounded-md border bg-zinc-800 border-zinc-700 py-1 px-2 focus:outline-none focus:border-gray-400 placeholder:text-sm  mb-1"
                 placeholder="johndoe@xyz.com"
               />
 
@@ -128,14 +128,12 @@ export const Contact = () => {
                 {formState.email.error && formState.email.error}
               </small>
 
-              <label className="text-sm font-normal text-zinc-400 mb-2 ">
-                Message
-              </label>
+              <label className="text-sm font-normal  mb-2 ">Message</label>
               <textarea
                 rows={3}
                 value={formState.message.value}
                 onChange={(e) => onChangeHandler("message", e.target.value)}
-                className="text-zinc-400 rounded-md border border-zinc-700 py-1 px-2 bg-zinc-800 focus:outline-none focus:border-gray-400 placeholder:text-sm   mb-1"
+                className=" rounded-md border border-zinc-700 py-1 px-2 bg-zinc-800 focus:outline-none focus:border-gray-400 placeholder:text-sm   mb-1"
                 placeholder="I'd love a compliment from you."
               />
               <small className="h-4 min-h-4 text-red-500 font-semibold mb-4">
@@ -143,7 +141,7 @@ export const Contact = () => {
               </small>
               <button
                 onClick={handleSubmit}
-                className="text-zinc-100  w-full px-4 py-2 md:py-4 border-2 border-zinc-800 bg-zinc-700 rounded-md font-normal text-sm  mb-4 transition duration-200 hover:shadow-none"
+                className="  w-full px-4 py-2 md:py-4 border-2 border-zinc-800 bg-zinc-700 rounded-md font-normal text-sm  mb-4 transition duration-200 hover:shadow-none"
               >
                 {loading ? "Submitting..." : "Submit"}
               </button>
@@ -170,7 +168,7 @@ export const Contact = () => {
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            className="w-6 h-6 text-zinc-100"
+            className="w-6 h-6 "
           >
             <path
               stroke-linecap="round"

@@ -11,14 +11,14 @@ export const Logo = ({ textClassName }: { textClassName?: string }) => {
     <Link
       href="/"
       className={clsx(
-        "font-bold   text-sm flex items-center justify-center text-white space-x-2",
+        "font-bold text-sm flex items-center justify-center space-x-2",
         textClassName
       )}
     >
       <BlurImage
         width={30}
         height={30}
-        src={`/images/avatar.png`}
+        src={`/images/profile.jpeg`}
         className="rounded-full"
       />
       <span className={twMerge("font-inter font-bold", textClassName)}>

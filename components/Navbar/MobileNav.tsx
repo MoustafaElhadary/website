@@ -35,8 +35,8 @@ export const MobileNav = ({ navItems }: { navItems: NavItem[] }) => {
   return (
     <>
       <div className="flex flex-row justify-between items-center w-full">
-        <Logo textClassName="text-zinc-100" />
-        <IoIosMenu onClick={() => setOpen(!open)} className="text-zinc-100" />
+        <Logo textClassName="" />
+        <IoIosMenu onClick={() => setOpen(!open)} className="text-black" />
       </div>
       <AnimatePresence>
         {open && (
@@ -45,18 +45,14 @@ export const MobileNav = ({ navItems }: { navItems: NavItem[] }) => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="fixed inset-0 bg-zinc-800 z-50 flex flex-col justify-center items-center space-y-10  text-xl font-bold text-zinc-600  hover:text-zinc-800 transition duration-200"
+            className="fixed inset-0 bg-zinc-800 z-50 flex flex-col justify-center items-center space-y-10  text-xl font-bold   hover: transition duration-200"
           >
             <IoIosCloseCircleOutline
-              className="absolute right-8 top-14 h-5 w-5 text-zinc-100"
+              className="absolute right-8 top-14 h-5 w-5 "
               onClick={() => setOpen(!open)}
             />
             {navItems.map((navItem, idx: number) => (
-              <CustomLink
-                key={`link=${idx}`}
-                href={navItem.link}
-                className="text-zinc-200"
-              >
+              <CustomLink key={`link=${idx}`} href={navItem.link} className="">
                 <motion.span variants={childItems} className="block">
                   {navItem.name}
                 </motion.span>
@@ -64,11 +60,11 @@ export const MobileNav = ({ navItems }: { navItems: NavItem[] }) => {
             ))}
             <motion.a
               variants={childItems}
-              href="/cv.pdf"
+              href="/resume.pdf"
               target="__blank"
-              className="text-white inline-flex items-center justify-center rounded-[10px] bg-gradient-to-b from-[#464d55] to-[#25292e] text-sm px-4 py-2 shadow-[0_10px_20px_rgba(0,_0,_0,_.1),0_3px_6px_rgba(0,_0,_0,_.05)] hover:shadow-[rgba(0,_1,_0,_.2)_0_2px_8px] active:outline-none hover:opacity-80 "
+              className=" inline-flex items-center justify-center rounded-[10px] bg-gradient-to-b from-[#464d55] to-[#25292e] text-sm px-4 py-2 shadow-[0_10px_20px_rgba(0,_0,_0,_.1),0_3px_6px_rgba(0,_0,_0,_.05)] hover:shadow-[rgba(0,_1,_0,_.2)_0_2px_8px] active:outline-none hover:opacity-80 "
             >
-              Download CV
+              Download Resume
             </motion.a>
           </motion.div>
         )}
