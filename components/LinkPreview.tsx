@@ -48,15 +48,6 @@ export const LinkPreview = ({
 
   return (
     <>
-      {/**
-       * Microlink.io + next/image can take a few seconds to fetch and generate
-       * a screenshot. The delay makes <LinkPreview> pointless. As a hacky
-       * solution we create a second <Image> in a Portal after the component has
-       * mounted. This <Image> triggers microlink.io + next/image so that the
-       * image itself is ready by the time the user hovers on a <LinkPreview>.
-       * Not concerned about the performance impact because <Image>'s are cached
-       * after they are generated and the images themselves are tiny (< 10kb).
-       */}
       {isMounted ? (
         <Portal>
           <div className="hidden">
@@ -78,7 +69,11 @@ export const LinkPreview = ({
           setOpen(open);
         }}
       >
-        <HoverCardPrimitive.Trigger className={className} href={url}>
+        <HoverCardPrimitive.Trigger
+          className={className}
+          href={url}
+          target="_blank"
+        >
           {children}
         </HoverCardPrimitive.Trigger>
 
@@ -93,9 +88,7 @@ export const LinkPreview = ({
             <a
               href={url}
               className="block p-1 bg-gradient-to-t from-slate-900 via-slate-800 to-slate-600 border border-transparent  rounded-xl hover:border-zinc-800 relative overflow-hidden"
-              // Unfortunate hack to remove the weird whitespace left by
-              // next/image wrapper div
-              // https://github.com/vercel/next.js/issues/18915
+              target="_blank"
               style={{ fontSize: 0 }}
             >
               <div className="absolute inset-0 w-full h-full z-20 bg-zinc-900 [mask-image:linear-gradient(to_bottom,transparent,transparent,white)]" />

@@ -76,7 +76,8 @@ export const LatestRepos = ({
 
           <div className="flex justify-center relative z-[70]">
             <Link
-              href="/contributions"
+              href="https://github.com/moustafaelhadary"
+              target="_blank"
               className="border border-gray-300 bg-white px-8 py-2 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition duration-200 text-gray-800"
             >
               Show More

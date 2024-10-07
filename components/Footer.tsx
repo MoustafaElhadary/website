@@ -1,15 +1,13 @@
-import React from "react";
-
-import { CustomLink } from "./CustomLink";
+import { navItems } from "@/constants/navItems";
+import { user } from "@/constants/user";
 import {
   AiOutlineGithub,
   AiOutlineInstagram,
   AiOutlineLinkedin,
   AiOutlineTwitter,
 } from "react-icons/ai";
-import { navItems } from "@/constants/navItems";
-import { Logo } from "./Logo";
-import { user } from "@/constants/user";
+import { CustomLink } from "./CustomLink";
+import NowPlaying from "./spotify/NowPlaying";
 
 export const Footer = () => {
   const socials = [
@@ -45,8 +43,7 @@ export const Footer = () => {
   return (
     <div className="border-t border-slate-900/5 py-10 max-w-6xl mx-auto px-8">
       <div className="flex flex-col justify-center items-center py-10 ">
-        <Logo textClassName=" text-xl" />
-
+        <NowPlaying />
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4">
           {navItems.map((navItem, idx: number) => (
             <CustomLink

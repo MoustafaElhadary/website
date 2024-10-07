@@ -1,17 +1,15 @@
-import React from "react";
 import { Timeline } from "@/components/Timeline";
 import { user } from "@/constants/user";
+import { getTopTracks } from "@/lib/spotify";
 import Image from "next/image";
 import {
   AiOutlineGithub,
+  AiOutlineInstagram,
   AiOutlineLinkedin,
   AiOutlineTwitter,
-  AiOutlineInstagram,
 } from "react-icons/ai";
-import { LinkPreview } from "./LinkPreview";
 import { Experience } from "./Experience";
-import NowPlaying from "./spotify/NowPlaying";
-import { getTopTracks } from "@/lib/spotify";
+import { LinkPreview } from "./LinkPreview";
 import { TracksList } from "./spotify/TopTracksList";
 
 const ProfileImageWithSocials = ({ isMobile = false }) => {
@@ -92,60 +90,59 @@ export default async function Hero() {
       </div>
 
       {/* Now Playing for mobile */}
-      <div className="lg:hidden mb-8 flex justify-center">
-        <NowPlaying />
-      </div>
 
       <div className="flex-grow">
         <div className="flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 justify-between">
           <div>
             <h1 className="font-bold text-3xl md:text-5xl md:leading-tight max-w-3xl">
               Hey! I&apos;m
-              <span className="text-cyan-500"> Moustafa Elhadary</span> and
-              I&apos;m a full stack soap engineer.
+              <span className="text-cyan-500"> Moustafa Elhadary</span> 👋🏽
             </h1>
-            <p className=" text-sm md:text-base max-w-2xl mt-8 md:leading-loose tracking-wide">
-              I&apos;ve been obsessed with technology ever since I was a kid.
-              When I wasn&apos;t taking apart my family&apos;s computer (sorry,
-              mom), I was teaching myself how to code. Fast forward a few years,
-              and now I&apos;m a full-fledged code ninja with an insatiable
-              thirst for creating beautiful websites and functional
-              applications.
+            <p className="text-sm md:text-base max-w-2xl mt-8 md:leading-loose tracking-wide">
+              I&apos;m a software engineer and tech lead at{" "}
+              <LinkPreview
+                className="font-bold hover:text-cyan-500 transition duration-150 outline-none"
+                url="https://www.mckinsey.com/"
+              >
+                McKinsey & Company
+              </LinkPreview>
+              , collaborating with Fortune 100 companies to build AI-driven
+              solutions that transform industries. From creating AI tools that
+              save thousands of hours in data processing to developing
+              forecasting systems for teams of over 16,000, to delivering
+              solutions that resulted in $70 million in savings for a healthcare
+              client.
             </p>
           </div>
         </div>
         <>
-          <p className=" text-sm md:text-base mt-8 md:leading-loose tracking-wide">
-            When I&apos;m not busy slaying bugs and writing code, I&apos;m
-            usually busy indulging in my two favorite hobbies: hot sauce and dad
-            jokes. I firmly believe that a good laugh and a dash of hot sauce
-            can fix just about anything, including bugs in my code (okay, maybe
-            not that last part).
+          <p className="text-sm md:text-base mt-8 md:leading-loose tracking-wide">
+            In my free time, I love building projects that make a real
+            difference:
           </p>
-          <div className="mt-8  text-sm md:text-base max-w-2xl leading-loose tracking-wide">
-            Building{" "}
-            <LinkPreview
-              className={
-                " font-bold hover:text-cyan-500 transition duration-150 outline-none"
-              }
-              url="https://algochurn.com"
-            >
-              Algochurn
-            </LinkPreview>{" "}
-            and{" "}
-            <LinkPreview
-              className={
-                " font-bold hover:text-cyan-500 transition duration-150"
-              }
-              url="https://aceternity.com"
-            >
-              Aceternity
-            </LinkPreview>{" "}
-            when I&apos;m not working on my day job.
-          </div>
-          <p className=" text-sm md:text-base mt-8 md:leading-loose tracking-wide">
-            Here&apos;s a timeline of what I&apos;ve been upto
-          </p>
+          <ul className="list-disc list-inside text-sm md:text-base mt-4 md:leading-loose tracking-wide">
+            <li>
+              <LinkPreview
+                className="font-bold hover:text-cyan-500 transition duration-150 outline-none"
+                url="https://lpukrainerelief.com"
+              >
+                LPUkraineRelief.com
+              </LinkPreview>
+              : Developed this platform in 12 hours to support my Ukrainian
+              colleagues, helping raise over $700,000.
+            </li>
+            <li>
+              <LinkPreview
+                className="font-bold hover:text-cyan-500 transition duration-150 outline-none"
+                url="https://web.archive.org/web/20231003074741/https://www.tawwr.com/"
+              >
+                Tawwr
+              </LinkPreview>
+              : Co-founded the Middle East&apos;s first income-share software
+              engineering bootcamp, empowering students to kickstart their tech
+              careers without upfront costs.
+            </li>
+          </ul>
 
           <Experience />
           <Timeline />
@@ -156,10 +153,6 @@ export default async function Hero() {
         {/* Profile image with socials for desktop */}
         <div className="hidden lg:block">
           <ProfileImageWithSocials />
-        </div>
-        {/* Now Playing for desktop */}
-        <div className="hidden lg:block">
-          <NowPlaying />
         </div>
         <TracksList tracks={tracks} />
       </aside>

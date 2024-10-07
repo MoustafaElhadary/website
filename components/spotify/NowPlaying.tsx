@@ -18,7 +18,6 @@ export default function NowPlaying() {
   const { data } = useQuery<NowPlayingData, Error>({
     queryKey: ["nowPlaying"],
     queryFn: fetchNowPlaying,
-    refetchInterval: 10000,
     staleTime: 0,
   });
 

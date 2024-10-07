@@ -1,5 +1,3 @@
-import { Footer } from "@/components/Footer";
-import Navbar from "@/components/Navbar/Navbar";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -36,11 +34,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main className={clsx("min-h-screen antialiased ")}>
-          <Navbar />
-          {children}
-          <Footer />
-        </main>
+        <main className={clsx("min-h-screen antialiased ")}>{children}</main>
       </body>
     </html>
   );
